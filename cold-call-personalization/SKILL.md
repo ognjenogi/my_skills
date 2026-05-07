@@ -9,15 +9,15 @@ description: Use when the user asks to generate a personalized cold call script,
 This skill is designed to generate highly personalized, high-converting cold call scripts based on the Connor Murray "Who, Why, What" framework. It is specifically tailored for the Serbian B2B market, representing Be-Cloud (a Top 50 Global Microsoft Partner).
 
 ## Step 1: Research & Info Gathering
-When the user provides a lead (or asks you to prepare a script for a lead), you must first identify:
-1. **Industry (Industrija):** What does the company do?
-2. **Position (Titula):** What is the lead's role? (e.g., IT Manager, CFO, CEO)
-3. **Pain Point (Problem):** Based on their industry and role, what is their most likely Microsoft/IT pain point? 
-   - *Example (IT/SysAdmin):* Unused licenses, Entra ID chaos, SKU mismatch.
-   - *Example (Finance/CEO):* Overpaying for licenses, budget optimization, compliance.
-   - *Example (Manufacturing/Logistics):* Frontline worker vs Office worker licenses, field data connectivity.
+When the user provides a lead, you must first identify their Industry and Role. Then, connect their profile strictly to Be-Cloud's two main offerings for cold calls:
+1. **The Revision (Revizija licenci):** How can their specific industry benefit from a license audit? (e.g., finding unused licenses, fixing Frontline worker SKU mismatches).
+2. **The "New Stuff" (Novi Microsoft alati):** What newly included Microsoft features (like Copilot, Purview, new Defender capabilities, or Teams Premium) would this specific person care about?
 
-*If the user doesn't provide enough information, use your web search or knowledge to fill in the gaps before generating the script.*
+## Step 2: The Caller Brief (Bullet points for the user)
+Before writing any script, provide the user with a short, punchy "Caller Brief". This should be 3-4 bullet points of concrete info the user can glance at and use *during* the call. It should include:
+- A specific industry trend or risk.
+- Exactly why this person needs a **license revision**.
+- Exactly which **new Microsoft features** to mention to them to get their attention.
 
 ## Step 2: The Script Generation
 Generate the script in **Serbian**. The script MUST follow this exact structure, with NO extra fluff ("Nadam se da ste dobro", "Da li imate minut", etc.).
@@ -28,10 +28,10 @@ Always start with:
 *(Wait for "Dobro, recite" or similar, then immediately proceed)*
 
 ### B. The Value Statement (Who, Why)
-Combine the WHO and the WHY in two flowing sentences.
+Combine the WHO and the WHY into a very short, punchy value statement focused on the revision and new features.
 
-**Who:** `Zovem Vas jer sam ja deo [Specifičan tim, npr. tima za cloud infrastrukturu / tima za poslovna rešenja]...`
-**Why:** `...koja najviše sarađuje sa [Njegova Industrija] organizacijama. Najčešće radimo sa timovima kako bismo im pomogli oko [Specifičan Pain Point iz Koraka 1].`
+**Who:** `Zovem Vas jer sam deo Be-Cloud tima koji najviše sarađuje sa [Njegova Industrija] organizacijama.`
+**Why:** `Trenutno radimo besplatne revizije Microsoft licenci, jer želimo da vam pokažemo neke od novih stvari i alata koje je Microsoft nedavno uključio, poput [Ubaci jedan novi "cool" feature iz Caller Briefa], a koje kompanije u vašoj industriji često već plaćaju kroz postojeće pakete a ne koriste.`
 
 ### C. The Ask (What) - Provide 3 Variations
 You must provide the user with three variations of how to close the script, so they can choose the best approach for the call.
@@ -52,4 +52,6 @@ You must provide the user with three variations of how to close the script, so t
 - **Be-Cloud Context:** Be-Cloud is a "Top 50 Microsoft Partner globalno". 
 
 ## Output Format
-When executing this skill, output the generated script in a clear Markdown format, clearly separating the Pain Point analysis, the Assumptive Formality, the Value Statement, and the 3 Ask Variations.
+Your output must follow this exact structure:
+1. **📞 The Caller Brief:** (3-4 bullet points of highly relevant info about their industry, why they need a revision, and what new features to hook them with).
+2. **📜 The Script:** (Short Assumptive Formality + Value Statement + 3 Ask Variations). Do NOT generate a long, text-heavy script. Keep it extremely concise.
