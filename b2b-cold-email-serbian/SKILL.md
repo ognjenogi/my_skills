@@ -62,10 +62,10 @@ Use the **Email #1 Template** below. One email per lead.
 
 ### Be-Cloud Intro — Exact Wording
 
-> ✅ `Deo sam Be-Cloud tima, jednog od 50 vodećih Microsoft partnera globalno.`
-> ❌ "Radim u Be-Cloudu, direktnom Microsoftovom partneru" — starija verzija, zameniti
+> ✅ `Deo sam tima Be-Cloud, direktnog Microsoftovog partnera koji posluje u 7 zemalja Evrope.`
+> ❌ "jednog od 50 vodećih Microsoft partnera globalno" — ZABRANJENO KORIŠĆENJE SUPERLATIVA KAO ŠTO JE "vodeći" ILI "top 50".
+> ❌ "Radim u Be-Cloudu" — izbegavati
 > ❌ "za Srbiju" — ne dodavati
-> ❌ "u 7 zemalja Evrope" — ne koristiti
 > ❌ "Zovem se Ognjen Nikolić" — ime je u potpisu
 > ❌ "Microsoft finansira ovaj uvodni razgovor" — zvuči kao pravdanje, ne koristiti
 
@@ -133,6 +133,9 @@ Be-Cloud | Microsoft Partner
 
 **Female names → Poštovana [ime] (unchanged):**
 
+- **Zlatno pravilo:** Obavezno proveriti pol pre generisanja! Ako ime završava na 'a' (uz izuzetke muških imena: Nikola, Luka, Nemanja, Ilija, Sava, Relja, Andrija, Matija, Kosta, Vanja, Saša, Mihajlo), oslovljavanje OBAVEZNO mora biti **"Poštovana"** (a ne "Poštovani").
+- **Zlatno pravilo za zamenu imena i prezimena:** U CRM-u klijenti često upišu ime kao "Jankovic Milos". Pre slanja, OBAVEZNO proveri da li "First Name" polje završava na `"ić"` ili `"ic"`. Ako je tako, to znači da je u pitanju prezime i uvek ih moraš zameniti kako bi klijenta oslovio sa "Poštovani Miloše" umesto "Poštovani Jankovic".
+
 ```python
 FEMALE_NAMES = {
     'Miljana','Snezana','Katarina','Jelena','Danijela','Milica',
@@ -142,6 +145,14 @@ FEMALE_NAMES = {
 }
 # Saša, Andrea, Nikola — muški kontekstualno
 ```
+
+### Industry Mapping & False Friends (CRITICAL)
+
+> **ZABRANJENO: Oslanjanje na prosti "contains" string match za industrije.** Uvek prvo detaljno mapirajte industriju.
+> - `hospitality` NIJE `hospital` (npr. Hotel nema pacijente!)
+> - `food production` NIJE ugostiteljstvo/turizam.
+> - `automotive` (poput polovniautomobili.com) NIJE uvek "proizvodni pogon".
+> - `gambling/casinos` NIJE turizam, već industrija zabave pod strogim compliance pravilima i velikim transakcijama.
 
 ---
 
