@@ -6,7 +6,7 @@ description: Use when the user asks to generate a personalized cold call script,
 # Cold Call Personalization Skill (Salesmotion 2026)
 
 ## Overview
-This skill is designed to generate highly personalized, high-converting cold call scripts based on the Connor Murray "Who, Why, What" framework. It is specifically tailored for the Serbian B2B market, representing Be-Cloud (a Top 50 Global Microsoft Partner).
+This skill is designed to generate highly personalized, high-converting cold call scripts based on the Connor Murray "Who, Why, What" framework. It is specifically tailored for the Serbian B2B market, representing Be-Cloud (direktni Microsoftov partner koji posluje u 7 zemalja Evrope).
 
 ## Step 1: Research & Info Gathering
 When the user provides a lead, you must first identify their Industry and Role. Then, connect their profile strictly to Be-Cloud's two main offerings for cold calls:
@@ -50,7 +50,7 @@ You must provide the user with three variations of how to close the script, so t
 - **Language:** Serbian (Full diacritics: š, đ, č, ć, ž).
 - **Tone:** Peer-to-peer. Authoritative but polite. You are an expert calling a peer, not a telemarketer begging for time.
 - **Never Use:** "Da li imate minut?", "Nadam se da vas ne prekidam", "Da li je loše vreme?". (This gives away power immediately).
-- **Be-Cloud Context:** Be-Cloud is a "Top 50 Microsoft Partner globalno". 
+- **Be-Cloud Context:** Be-Cloud je direktan Microsoftov partner koji posluje u 7 zemalja Evrope. ZABRANJENO je koristiti "Top 50", "vodeći", ili bilo koji neproveriv superlativ.
 
 ## Output Format
 Your output must follow this exact structure:
