@@ -6,6 +6,35 @@ Output must be Power Automate-ready Excel/CSV matching the `outreach_brain.xlsx`
 
 ---
 
+## 🔴 MANDATORY SKILL MAINTENANCE PROTOCOL
+
+> **Every time something new, important, and verified is discovered during outreach work — this skill MUST be updated immediately and pushed to GitHub.**
+
+This includes (but is not limited to):
+- A new **industry hook** that worked or failed
+- A new **bad keyword** found in CRM notes that should filter leads
+- A new **male name ending in -a** (like Malisa, Vlada) that needs to go in `MALE_NAMES_A`
+- A new **format detection edge case** in `parse_row`
+- A **column mapping change** in source Excel
+- A new **hook** from the Hook Library that becomes active
+- Any **tone or wording** improvement proven to increase reply rate
+- Any **Power Automate** behavior that affects field format requirements
+
+**Protocol after any discovery:**
+```bash
+# 1. Update the relevant section in this file
+# 2. Run the generation script to verify no regressions
+# 3. Push to GitHub:
+cd /Users/ognjennikolic/.gemini/antigravity/skills
+git add .
+git commit -m "Update be-cloud-outreach: [describe what was learned]"
+git push origin main
+```
+
+**Never leave a verified learning undocumented. The skill is the single source of truth.**
+
+---
+
 ## ARCHITECTURE OVERVIEW
 
 ```
