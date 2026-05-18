@@ -255,10 +255,10 @@ Never say "vidimo da imate problem". Always: "dešava se promena koja vas pogađ
 
 ---
 
-### HOOK 1: Price Increase (active: June 2025)
+### HOOK 1: Price Increase (active: July 2025)
 Use when: Microsoft has a scheduled price increase or licensing cost change.
 ```
-Microsoft od 1. juna menja cene i licencne modele, a kao Tier 1 partner imamo najnovije informacije o promenama koje ce se desiti.
+Microsoft od 1. jula menja cene i licencne modele, a kao Tier 1 partner imamo najnovije informacije o promenama koje ce se desiti.
 ```
 
 ### HOOK 2: Licensing Model Change (evergreen)
