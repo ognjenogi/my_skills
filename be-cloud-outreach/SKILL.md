@@ -297,11 +297,12 @@ f1_body = (
 )
 ```
 
-### F2_Body:
+### F2_Body (Professional Dissatisfaction):
 ```python
 f2_body = (
     f"{salutation} {vocative},<br /><br />"
-    f"Značilo bi mi Vaše mišljenje o ovome kada uhvatite malo vremena.<br /><br />"
+    f"Malo sam iznenađen što se nismo čuli. Obično kada kontaktiram kompanije poput {company} povodom julskih promena u Microsoft licenciranju, žele što pre da razgovaraju kako bi izbegli nepotrebne troškove.<br /><br />"
+    f"Da li optimizacija ovih promena trenutno nije prioritet za Vas?<br /><br />"
     f"Srdačan pozdrav,<br />Ognjen Nikolić<br />Be-Cloud | Microsoft Partner"
 )
 ```
