@@ -91,19 +91,19 @@ One short factual sentence about Be-Cloud. No "top 50", no "vodeći", no invente
 Deo sam tima Be-Cloud, Microsoftovog Tier 1 Cloud partnera koji posluje u 7 zemalja Evrope.
 ```
 
-### Part 3: Why (Industry-specific pain point — 2 sentences max)
-Connect to their specific industry pain. Make it feel like you know their world.
-Must end with a strong "certainty" bridge to the meeting value:
+### Part 3: Why (Industry-specific pain point)
+Connect to their specific industry. Make it feel like you know their world and highlight the upcoming July changes and potential benefits (e.g., Copilot/Power Automate).
+Example for IT:
 ```
-Kao Tier 1 partner imamo direktan pristup Microsoftovim roadmap informacijama koje još nisu javno dostupne.
-Na kratkom razgovoru bih Vas uputio u šta se konkretno menja i kako to utiče na [njihova industrija] kompanije.
+IT kompanije poput {comp} su među prvima koje osete promene u Microsoft licenciranju. Microsoft od 1. jula menja cene i licencne modele, ali i otključava nove AI i automatizacijske opcije kroz Copilot i Power Automate koje mogu zameniti eksterne alate koje verovatno trenutno plaćate. Kao Tier 1 partner imamo najnovije informacije o promenama koje će se desiti.
 ```
 
 ### Part 4: Ask (CTA — two specific date/time options)
+Use an assumptive CTA format:
 ```
-Da li Vam više odgovara {DATE1} u 10h ili {DATE2} u 14h za kratak Teams poziv?
+Hajmo na kratak Teams poziv (30 min), {DATE1} ili {DATE2}, i da vidimo gde najbolje možete da iskoristite te promene.
 ```
-Always two options. Never open-ended. Dates must be updated per batch.
+Always two options. Assumptive tone ("Hajmo"). Dates must be updated per batch.
 
 ### Signature (fixed)
 ```
@@ -152,11 +152,9 @@ def get_vocative(first_name):
     # Foreign/invariable names
     foreign_no_change = {
         "harvey", "jan", "edin", "roko", "senko", "jure", "lino", "ivo",
-        "anto", "ante", "kristijan", "igor", "branimir", "goran", "dinko",
-        "danijel", "zoran", "vladan", "dejan", "domagoj", "tomislav",
-        "mladen", "doni", "andrija", "nikola", "luka", "matija", "vanja",
+        "anto", "ante", "doni", "andrija", "nikola", "luka", "matija", "vanja",
         "nemanja", "ilija", "sava", "relja", "kosta", "sasa", "mihajlo",
-        "darko", "marko", "branko", "ranko", "stanko", "slavko", "zdravko",
+        "darko", "marko", "branko", "ranko", "stanko", "slavko", "zdravko", "vlado"
     }
     if nl in foreign_no_change:
         return n  # no change
@@ -206,24 +204,18 @@ def get_vocative(first_name):
 
 ---
 
-## INDUSTRY HOOK REFERENCE (get_industry_hook function)
+## INDUSTRY HOOK REFERENCE (get_why_section function)
 
-Each call returns: `(ind_label, problem, loss)` used in the email template.
+The "WHY" section uses the Connor Murray format. It combines industry awareness with the upcoming event (e.g., July 1st changes).
 
-| Industry keyword | ind_label | problem | loss |
-|---|---|---|---|
-| information technology, software, internet | IT i tehnološkim | neefikasnim upravljanjem licencama i shadow IT-jem | nepotreban trošak i bezbednosni rizik |
-| financial, banking, insurance, accounting | finansijskim i računovodstvenim | bezbednim deljenjem osetljivih finansijskih izveštaja | gubitak vremena na administraciju i regulatorni rizik |
-| legal | advokatskim i pravnim | fragmentisanim sistemima za upravljanje predmetima | gubitak naplativih sati i rizik po poverljivost klijenata |
-| health, medical, pharmaceuticals | zdravstvenim i farmaceutskim | compliance zahtevima za čuvanje osetljivih podataka | bezbednosni rizik i potencijalne zakonske kazne |
-| logistics, supply chain, transport | logističkim i transportnim | praćenjem podataka između lokacija i terenskih timova | operativna kašnjenja i gubitak kontrole |
-| construction, architecture, real estate | arhitektonskim i građevinskim | sinhronizacijom projektnih fajlova između terena i kancelarije | kašnjenje projekata i gubitak produktivnosti |
-| manufacturing, machinery, automotive | inženjerskim i proizvodnim | prekidima u komunikaciji između pogona i uprave | usporavanje procesa i rizik od zastoja |
-| marketing, advertising, media, design | kreativnim i marketinškim | rasutom dokumentacijom i nesigurnim deljenjem fajlova | gubitak vremena i probijanje rokova |
-| retail, wholesale, consumer | trgovačkim i uslužnim | fluktuacijom zaposlenih i sporim onboarding procesom | skriveni troškovi neiskorišćenih licenci |
-| tourism, hospitality, food | turističkim i ugostiteljskim | fluktuacijom zaposlenih i čestim onboardingom u IT sisteme | visoki troškovi IT administracije |
-| consulting, research | konsultantskim i istraživačkim | bezbednim skladištenjem i pretragom podataka | neefikasnost timova i curenje know-how-a |
-| default (unknown) | Vašim | fragmentisanim IT alatima koji koče produktivnost | skriveni trošak usled neiskorišćenih softverskih pretplata |
+### 1. IT, Software, SaaS, Fintech
+> IT kompanije poput {comp} su među prvima koje osete promene u Microsoft licenciranju. Microsoft od 1. jula menja cene i licencne modele, ali i otključava nove AI i automatizacijske opcije kroz Copilot i Power Automate koje mogu zameniti eksterne alate koje verovatno trenutno plaćate. Kao Tier 1 partner imamo najnovije informacije o promenama koje će se desiti.
+
+### 2. Construction, Architecture, Real Estate
+> Građevinske kompanije poput {comp} su među prvima koje osete promene u Microsoft licenciranju, posebno kada su u pitanju terenski timovi. Microsoft od 1. jula menja cene i licencne modele, ali i donosi načine da preko Power Automate platforme automatizujete izveštavanje sa gradilišta koristeći softver koji verovatno već imate. Kao Tier 1 partner imamo najnovije informacije o promenama koje će se desiti.
+
+### 3. Telecoms and General
+> Telekomunikacione kompanije poput {comp} su među prvima koje osete promene u Microsoft licenciranju. Microsoft od 1. jula menja cene i licencne modele, ali to je i prilika da pomoću ugrađene AI automatizacije optimizujete kompleksne operativne procese bez plaćanja dodatnih softvera. Kao Tier 1 partner imamo najnovije informacije o promenama koje će se desiti.
 
 ---
 
@@ -232,16 +224,16 @@ Each call returns: `(ind_label, problem, loss)` used in the email template.
 ```
 {salutation} {vocative},<br /><br />
 Deo sam tima Be-Cloud, Microsoftovog Tier 1 partnera koji posluje u 7 zemalja Evrope.<br /><br />
-{industry_sentence} {ACTIVE_HOOK}<br /><br />
-Hajde da zakazemo kratak Teams poziv, {CTA_DATE1} ili {CTA_DATE2}?<br /><br />
-Srdacan pozdrav,<br />Ognjen Nikolic<br />Be-Cloud | Microsoft Partner
+{why_section}<br /><br />
+Hajmo na kratak Teams poziv (30 min), {CTA_DATE1} ili {CTA_DATE2}, i da vidimo gde najbolje možete da iskoristite te promene.<br /><br />
+Srdačan pozdrav,<br />Ognjen Nikolić<br />Be-Cloud | Microsoft Partner
 ```
 
 **Rules:**
 - No em-dash (—) or en-dash (–). Use comma or period instead.
-- `industry_sentence` = 1 sentence personalized to their sector (see Industry Hook Reference)
-- `ACTIVE_HOOK` = the current event-based hook from the Hook Library below
-- CTA: "Hajde da zakazemo" or "Gledam da zakazemo" (decisive, not "Da li biste mogli")
+- `why_section` = Custom 3-sentence Connor Murray block tailored to their industry.
+- CTA: Must use the assumptive "Hajmo na kratak Teams poziv (30 min)..." format.
+- Do NOT use specific pricing details like "15-25%". Stick to "menja cene i licencne modele".
 
 ---
 
@@ -301,7 +293,7 @@ f1_body = (
     f"{salutation} {vocative},<br /><br />"
     f"Samo da proverim da ste videli moju prethodnu poruku.<br /><br />"
     f"Da li Vam odgovara {F1_DATE1} ili {F1_DATE2}?<br /><br />"
-    f"Srdacan pozdrav,<br />Ognjen Nikolic<br />Be-Cloud | Microsoft Partner"
+    f"Srdačan pozdrav,<br />Ognjen Nikolić<br />Be-Cloud | Microsoft Partner"
 )
 ```
 
@@ -309,8 +301,8 @@ f1_body = (
 ```python
 f2_body = (
     f"{salutation} {vocative},<br /><br />"
-    f"Znacilo bi mi Vase misljenje o ovome.<br /><br />"
-    f"Srdacan pozdrav,<br />Ognjen Nikolic<br />Be-Cloud | Microsoft Partner"
+    f"Značilo bi mi Vaše mišljenje o ovome kada uhvatite malo vremena.<br /><br />"
+    f"Srdačan pozdrav,<br />Ognjen Nikolić<br />Be-Cloud | Microsoft Partner"
 )
 ```
 
@@ -320,8 +312,8 @@ f3_body = (
     f"{salutation} {vocative},<br /><br />"
     f"Vidim da trenutno nema interesa za Microsoft licencnu analizu u {company}. "
     f"Zatvaramo ovu komunikaciju, ali ako se situacija promeni, slobodno me kontaktirajte. "
-    f"Sastanak je uvek besplatan.<br /><br />"
-    f"Srdacan pozdrav,<br />Ognjen Nikolic<br />Be-Cloud | Microsoft Partner"
+    f"Konsultacija je uvek besplatna.<br /><br />"
+    f"Srdačan pozdrav,<br />Ognjen Nikolić<br />Be-Cloud | Microsoft Partner"
 )
 ```
 
