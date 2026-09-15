@@ -154,19 +154,21 @@ When analyzing a face, structure the breakdown into distinct sections:
         3. **Sexual Dimorphism Premium**: Robust secondary sexual characteristics (broad fWHR, angular jawline, positive canthal tilt) elevate perceived visual presence.
         4. **Visual Impact & Contrast**: High Michelson peri-orbital and lip-to-skin contrast reinforces facial distinctiveness.
     - **Empirical Population Rarity Odds**:
-      - Rarity is calculated mathematically from the cumulative normal distribution $\Phi(z)$ with population parameters $\mu = 50, \sigma = 15$.
-      - Expressed clearly as "1 in $N$ individuals of the same demographic":
-        - $z \ge 2.33$ ($\text{Score} \ge 85$): $1 \text{ in } 100\text{+} \text{ (Top 1\%)}$.
-        - $z \ge 1.64$ ($\text{Score} \ge 75$): $1 \text{ in } 20\text{ (Top 5\%)}$.
-        - $z \ge 1.28$ ($\text{Score} \ge 69$): $1 \text{ in } 10\text{ (Top 10\%)}$.
-        - $z \ge 0.67$ ($\text{Score} \ge 60$): $1 \text{ in } 4\text{ (Top 25\%)}$.
+      - Rarity is calculated mathematically from the cumulative normal distribution $\Phi(z)$ calibrated against the general unselected population distribution ($\mu = 50, \sigma = 10$) and multivariate joint feature convergence.
+      - Expressed accurately as real-world population odds:
+        - $\text{Score} \ge 88.0$ ($z \ge +3.80$): **$1 \text{ in } 15,000\text{–}25,000\text{ individuals (Top 0.01%)}$** *(God-Tier / High-Fashion Editorial Archetype)*.
+        - $\text{Score} \ge 84.0$ ($z \ge +3.40$): **$1 \text{ in } 3,000\text{–}10,000\text{ individuals (Top 0.1%)}$** *(Elite Runway & Commercial Lead)*.
+        - $\text{Score} \ge 78.0$ ($z \ge +2.80$): **$1 \text{ in } 500\text{–}2,500\text{ individuals (Top 1%)}$** *(Prominent Commercial Actor / Lead Model)*.
+        - $\text{Score} \ge 70.0$ ($z \ge +2.00$): **$1 \text{ in } 50\text{–}200\text{ individuals (Top 5%)}$** *(Distinctly Attractive / Standout Presence)*.
+        - $\text{Score} \ge 60.0$ ($z \ge +1.00$): **$1 \text{ in } 6\text{–}15\text{ individuals (Top 15–25%)}$** *(Above Average / Harmonious Proportions)*.
+        - $\text{Score} \le 55.0$: **$1 \text{ in } 2\text{ individuals}$** *(Population Median / Everyday Demographics)*.
     - **Aesthetic Archetype Classifications**:
-      - $\ge 88.0$: *God-Tier High-Fashion Icon (Top 0.5%)*
-      - $83.0\text{–}87.9$: *Supermodel / Elite Runway & Commercial Lead (Top 1–2%)*
-      - $77.0\text{–}82.9$: *Prominent Model / Striking Lead Actor Tier (Top 5%)*
-      - $70.0\text{–}76.9$: *Highly Attractive / Distinctive Aesthetic Presence (Top 10%)*
-      - $60.0\text{–}69.9$: *Above Average / Harmonious Aesthetic (Top 25%)*
-      - $< 60.0$: *Harmonious Normal Range / Everyday Demographics*
+      - $\ge 88.0$: *God-Tier / High-Fashion Editorial Archetype (Top 0.01%)*
+      - $84.0\text{–}87.9$: *Supermodel / Elite Runway & Commercial Lead (Top 0.1%)*
+      - $78.0\text{–}83.9$: *Agency Standard / Commercial Model & Actor (Top 1%)*
+      - $70.0\text{–}77.9$: *Distinctly Attractive / High Aesthetic Harmony (Top 5%)*
+      - $60.0\text{–}69.9$: *Above Average / Balanced Proportions (Top 25%)*
+      - $< 60.0$: *Population Norm / Standard Harmony (Median Tier)*
 
 13. **Universal Anthropometric Invariance (Hair Occlusion, Rule of Fifths, 2D Ramus-to-Corpus)**:
     - **Dynamic Hair Occlusion Resilience**:
