@@ -105,6 +105,11 @@ When analyzing a face, structure the breakdown into distinct sections:
      - **Facial Convexity (Burstone)**: Ideal 158°–175° (Class I orthognathic alignment; <158° indicates Class II retrognathism, >175° indicates Class III prognathism).
      - **Gonial Angle & Chin Projection**: Mandibular ramus angle and anterior menton projection.
 
+10. **Semi-Profile Symmetry Attenuation & Continuous Weighting**:
+    - In angled semi-profile photos ($20^\circ < |\text{yaw}| \le 45^\circ$), 2D bilateral symmetry degrades as an artifact of perspective foreshortening.
+    - The engine continuously attenuates symmetry weighting from $33.3\%$ at $\text{yaw} \le 20^\circ$ down to $0\%$ at $\text{yaw} \ge 45^\circ$ while scaling bone structure towards $60\%$ and harmony towards $40\%$.
+    - This prevents artificial perspective penalties from dampening elite skeletal frameworks in $3/4$ views.
+
 ## Style and Constraints
 
 - Treat deterministic tool output as authoritative.
