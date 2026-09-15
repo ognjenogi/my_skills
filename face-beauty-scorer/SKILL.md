@@ -31,12 +31,21 @@ tool named `face_beauty_scorer`.
   - `accuracy_context`: details on self-reported gender, ethnicity, and age bracket.
   - `feature_ratings`: anatomical cluster ratings (0–100), population percentiles (0–100%), and tiers for:
     - **Cheekbones & Midface**: cheekbone prominence, fWHR, midface third, facial index.
-    - **Jaw & Mandible**: jaw-to-face ratio, gonial angle, chin projection, jaw symmetry, facial adiposity.
-    - **Eyes & Peri-Orbital**: canthal tilt, interocular ratio, scleral show, eye symmetry, eye-to-mouth ratio.
+    - **Jaw & Mandible**: jaw-to-face ratio, gonial angle, chin projection, jaw symmetry, facial adiposity, ramus-corpus ratio.
+    - **Eyes & Peri-Orbital**: canthal tilt, interocular ratio, scleral show, eye symmetry, eye-to-mouth ratio, intercanthal eye width ratio, palpebral fissure ratio.
     - **Nose & Nasal Balance**: nose width ratio, nasofacial angle, nasolabial angle, nasomental angle.
-    - **Lips & Lower Third**: lip width ratio, philtrum ratio, philtrum-chin ratio, lower facial third.
+    - **Lips & Lower Third**: lip width ratio, philtrum ratio, philtrum-chin ratio, lower facial third, vermilion height ratio.
     - **Sagittal Profile Alignment** (lateral profiles): facial convexity, nasomental angle, nasofacial angle, chin projection, gonial angle.
-  - `metrics`: 22 research-backed geometric measurements, each with raw value, subscore, 0–100 rating, and population percentile.
+  - `perceived_attractiveness`: psychological perception synthesis including:
+    - `perceived_score_10`: 1–10 scale reflecting holistic human visual impression.
+    - `perceived_score_100`: 1–100 calibrated perception score.
+    - `gestalt_halo_boost`: perceptual synergy boost when multiple anchor features (cheekbones, eyes, jaw, nose) are elite ($\ge 82$).
+    - `sexual_dimorphism_score`: expression of secondary sexual characteristics (fWHR, jaw width, canthal tilt).
+    - `visual_impact_contrast`: facial feature contrast and aesthetic salience.
+    - `statistical_rarity_odds`: population frequency ("1 in N humans of same sex").
+    - `rarity_tier`: population percentile classification (e.g. `Top 1% — Elite Supermodel Tier`).
+    - `aesthetic_archetype`: real-world categorization (e.g. `Supermodel / Elite Runway & Commercial Lead`).
+  - `metrics`: 27 research-backed geometric measurements, each with raw value, subscore, 0–100 rating, and population percentile.
 
 All scores and measurements are **already computed deterministically** from
 geometric research and datasets. You must treat them as ground truth and not
@@ -126,6 +135,45 @@ When analyzing a face, structure the breakdown into distinct sections:
     - **Interocular Distance vs Cheekbone Width Distinctions**:
       - Interocular spacing evaluated relative to bizygomatic width (`interpupillary / bizygomatic`, Pallett et al. $0.46$) can appear artificially depressed when a subject exhibits extreme lateral zygomatic flare (high cheekbone prominence $> 1.18$ / $\text{fWHR} > 1.85$).
       - When evaluating ocular balance, analysts must correlate the bizygomatic ratio with the Rule of Fifths ($\text{intercanthal} / \text{eye\_fissure\_width} \approx 1.0$) to confirm whether eye spacing is anatomically proportional.
+
+12. **Perceived Attractiveness, Gestalt Halo Synergy & Statistical Rarity**:
+    - **Perceived Score Formulation**:
+      - Raw arithmetic means alone underestimate human perception because human observers process faces holistically rather than by averaging independent Euclidean distances.
+      - The engine calculates `perceived_score_100` and `perceived_score_10` by combining:
+        1. Base geometric foundation (Global Score).
+        2. **Gestalt Halo Synergy**: When multiple anchor features (`Cheekbones`, `Eyes`, `Jaw`, `Nose`) score $\ge 82$ (Top 1–5%), the cognitive halo effect creates an emergent impression exceeding any single isolated score.
+        3. **Sexual Dimorphism Premium**: Robust secondary sexual characteristics (broad fWHR, angular jawline, positive canthal tilt) elevate perceived visual presence.
+        4. **Visual Impact & Contrast**: High Michelson peri-orbital and lip-to-skin contrast reinforces facial distinctiveness.
+    - **Empirical Population Rarity Odds**:
+      - Rarity is calculated mathematically from the cumulative normal distribution $\Phi(z)$ with population parameters $\mu = 50, \sigma = 15$.
+      - Expressed clearly as "1 in $N$ individuals of the same demographic":
+        - $z \ge 2.33$ ($\text{Score} \ge 85$): $1 \text{ in } 100\text{+} \text{ (Top 1\%)}$.
+        - $z \ge 1.64$ ($\text{Score} \ge 75$): $1 \text{ in } 20\text{ (Top 5\%)}$.
+        - $z \ge 1.28$ ($\text{Score} \ge 69$): $1 \text{ in } 10\text{ (Top 10\%)}$.
+        - $z \ge 0.67$ ($\text{Score} \ge 60$): $1 \text{ in } 4\text{ (Top 25\%)}$.
+    - **Aesthetic Archetype Classifications**:
+      - $\ge 88.0$: *God-Tier High-Fashion Icon (Top 0.5%)*
+      - $83.0\text{–}87.9$: *Supermodel / Elite Runway & Commercial Lead (Top 1–2%)*
+      - $77.0\text{–}82.9$: *Prominent Model / Striking Lead Actor Tier (Top 5%)*
+      - $70.0\text{–}76.9$: *Highly Attractive / Distinctive Aesthetic Presence (Top 10%)*
+      - $60.0\text{–}69.9$: *Above Average / Harmonious Aesthetic (Top 25%)*
+      - $< 60.0$: *Harmonious Normal Range / Everyday Demographics*
+
+13. **Universal Anthropometric Invariance (Hair Occlusion, Rule of Fifths, 2D Ramus-to-Corpus)**:
+    - **Dynamic Hair Occlusion Resilience**:
+      - Forehead bangs, fringe, or curly hair falling over the upper face compress the detected upper third (`upper_third < 0.24`).
+      - The engine automatically detects `hairline_occluded=True`. It downweights trichion-dependent upper/mid thirds by 85% and shifts the weight dynamically to `midface_lowerface_ratio` (`[0.85, 1.05]`).
+      - This ensures that hairstyles never artificially penalize underlying skeletal facial harmony.
+    - **2D Projected Ramus-to-Corpus Proportions (`ramus_corpus_ratio`)**:
+      - In 3D unprojected skulls, the mandibular ramus/corpus ratio is $0.70\text{–}0.85$.
+      - In 2D photographic projections (frontal and 3/4 views), the horizontal mandibular corpus is foreshortened towards the camera by $\approx \cos(45^\circ) = 0.707$.
+      - Consequently, in 2D perspective space, a strong, chiseled masculine square jawline measures $1.00\text{–}1.25$ in vertical ramus vs horizontal corpus. Calibrating the male ideal band to `[1.00, 1.25]` reflects true 2D photographic cephalometry.
+    - **Decoupled Ocular Spacing (`intercanthal_eye_width_ratio`)**:
+      - Evaluates the classical da Vinci 1:1 Rule of Fifths band (`[0.92, 1.15]`), decoupling true ocular spacing from hyper-wide bizygomatic cheekbone flare.
+    - **Palpebral Fissure Ratio (`palpebral_fissure_ratio`)**:
+      - Evaluates vertical palpebral aperture to horizontal width (male almond/hunter eyes: `[0.28, 0.38]`, female: `[0.33, 0.42]`).
+    - **Vermilion Lower-to-Upper Height Ratio (`vermilion_height_ratio`)**:
+      - Evaluates lower-to-upper lip thickness against the classical clinical standard $1.5:1$ (`[1.35, 1.70]`).
 
 ## Style and Constraints
 
