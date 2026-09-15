@@ -80,6 +80,19 @@ When analyzing a face, structure the breakdown into distinct sections:
    - Robust, square jawlines (e.g., Brad Pitt, Henry Cavill) reach bigonial-to-bizygomatic ratios of 0.78–0.84.
    - The engine's calibrated male ideal band `[0.72, 0.84]` appropriately rewards strong mandibular width rather than penalizing masculine bone structure.
 
+9. **Lateral Profile & Sagittal Cephalometrics Protocol**:
+   - The engine classifies head yaw into three orientation modes:
+     - `frontal` ($|\text{yaw}| \le 20^\circ$): Full 22-metric frontal anthropometric & symmetry evaluation.
+     - `semi_profile` ($20^\circ < |\text{yaw}| \le 45^\circ$): 3/4 semi-profile with pose rectification.
+     - `lateral_profile` ($|\text{yaw}| > 45^\circ$): Sagittal cephalometric evaluation.
+   - For lateral profiles, bilateral symmetry is marked N/A, and the score is weighted as **60% Bone Structure + 40% Harmony**.
+   - Sagittal angles are evaluated along the 2D photographic silhouette:
+     - **Nasofacial Angle**: Ideal 30°–40° (dorsal nasal projection relative to facial plane).
+     - **Nasolabial Angle**: Ideal 90°–110° for males (subnasale columella-labral angle).
+     - **Nasomental Angle**: Ideal 120°–134° (nasal tip to chin alignment).
+     - **Facial Convexity (Burstone)**: Ideal 158°–175° (Class I orthognathic alignment; <158° indicates Class II retrognathism, >175° indicates Class III prognathism).
+     - **Gonial Angle & Chin Projection**: Mandibular ramus angle and anterior menton projection.
+
 ## Style and Constraints
 
 - Treat deterministic tool output as authoritative.
