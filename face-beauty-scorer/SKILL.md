@@ -70,6 +70,16 @@ When analyzing a face, structure the breakdown into distinct sections:
    - Identify metrics influenced by soft factors: body composition (facial adiposity index/buccal fat), grooming/skincare/contrast (facial contrast), hairstyle volume (facial height/width perception), and photographic setup (focal length, distance, diffuse lighting).
    - Provide concrete, non-surgical recommendations to reach the personal ceiling.
 
+7. **Hairline & Hairstyle Occlusion Awareness**:
+   - In photos where hair covers the forehead (e.g. bangs, fringe, forward curtains), the topmost landmark rests on the hair border rather than the anatomical trichion (true bony hairline).
+   - This artificially compresses the measured upper facial third (`facial_third_upper < 0.25`).
+   - When interpreting such photos, analysts must explicitly note hairstyle occlusion as a photographic artifact rather than genuine cranial disproportion.
+
+8. **Masculine Mandibular Dimorphism**:
+   - In male faces, testosterone stimulates lateral mandibular development during puberty.
+   - Robust, square jawlines (e.g., Brad Pitt, Henry Cavill) reach bigonial-to-bizygomatic ratios of 0.78–0.84.
+   - The engine's calibrated male ideal band `[0.72, 0.84]` appropriately rewards strong mandibular width rather than penalizing masculine bone structure.
+
 ## Style and Constraints
 
 - Treat deterministic tool output as authoritative.
