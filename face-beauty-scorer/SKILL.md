@@ -84,8 +84,17 @@ When analyzing a face, structure the breakdown into distinct sections:
    - **Facial Contrast**: Michelson contrast of eyes and lips against surrounding skin (Russell 2003/2009).
 
 5. **Bilateral Symmetry & The Uncanny Paradox**:
-   - Report overall, eye, and jaw symmetry.
-   - **Explain the Uncanny Paradox**: Explicitly explain that **95.0%–96.5% symmetry represents peak human natural beauty**. Mathematical 100% mirrored symmetry is penalized because human perceptual psychology identifies it as robotic, synthetic, and uncanny.
+   - **Report Both Raw Symmetry and Aesthetic Score**:
+     - Explicitly distinguish **Raw Geometric Symmetry** (e.g., $92.3\%$ raw symmetry $= 7.7\%$ physical anatomical asymmetry) from the **Aesthetic Symmetry Subscore** ($0\text{–}100$).
+     - Explain that under the **Uncanny Paradox**, natural human symmetry peaks at $94.5\%\text{–}96.5\%$ raw symmetry. Perfect $100\%$ mirrored symmetry is penalized in aesthetic perception because human cognition flags it as synthetic or robotic.
+   - **Coronal Level Cant (Y-Axis) & Transverse (X-Axis) Asymmetry**:
+     - Real-world human asymmetry is predominantly vertical, not merely horizontal. The engine evaluates:
+       1. **Transverse / Horizontal Symmetry ($X$-axis)**: Equidistance of paired bilateral landmarks from the sagittal facial midline ($|X_L - X_{mid}| \approx |X_R - X_{mid}|$).
+       2. **Vertical Coronal Cant ($Y$-axis)**: Parallelism of paired structures perpendicular to the sagittal facial axis, specifically measuring:
+          - **Vertical Orbital Cant / Dystopia**: Height discrepancy between the horizontal pupil/canthus centers ($|Y_{eye,L} - Y_{eye,R}|$).
+          - **Eyebrow Arch Cant**: Height difference between the peak arch of the left and right superciliary arches (landmarks $105$ and $334$).
+          - **Gonial Angle Cant**: Vertical difference between the left and right mandibular angles ($|Y_{gonion,L} - Y_{gonion,R}|$).
+          - **Commissural Cant**: Vertical tilt across the oral corners ($|Y_{mouth,L} - Y_{mouth,R}|$).
 
 6. **Modifiable Features & Actionable Ceiling**:
    - Identify metrics influenced by soft factors: body composition (facial adiposity index/buccal fat), grooming/skincare/contrast (facial contrast), hairstyle volume (facial height/width perception), and photographic setup (focal length, distance, diffuse lighting).
