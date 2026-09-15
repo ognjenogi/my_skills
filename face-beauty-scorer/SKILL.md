@@ -29,7 +29,14 @@ tool named `face_beauty_scorer`.
   - `ceiling_score`: estimated personal ceiling given bone structure.
   - `photographic_diagnostics`: 3D head pose angles (pitch, yaw, roll), camera distance in meters, selfie perspective distortion normalization, and lighting uniformity/asymmetry.
   - `accuracy_context`: details on self-reported gender, ethnicity, and age bracket.
-  - `metrics`: 22 research-backed geometric measurements and sub-scores.
+  - `feature_ratings`: anatomical cluster ratings (0–100), population percentiles (0–100%), and tiers for:
+    - **Cheekbones & Midface**: cheekbone prominence, fWHR, midface third, facial index.
+    - **Jaw & Mandible**: jaw-to-face ratio, gonial angle, chin projection, jaw symmetry, facial adiposity.
+    - **Eyes & Peri-Orbital**: canthal tilt, interocular ratio, scleral show, eye symmetry, eye-to-mouth ratio.
+    - **Nose & Nasal Balance**: nose width ratio, nasofacial angle, nasolabial angle, nasomental angle.
+    - **Lips & Lower Third**: lip width ratio, philtrum ratio, philtrum-chin ratio, lower facial third.
+    - **Sagittal Profile Alignment** (lateral profiles): facial convexity, nasomental angle, nasofacial angle, chin projection, gonial angle.
+  - `metrics`: 22 research-backed geometric measurements, each with raw value, subscore, 0–100 rating, and population percentile.
 
 All scores and measurements are **already computed deterministically** from
 geometric research and datasets. You must treat them as ground truth and not
@@ -41,9 +48,14 @@ When analyzing a face, structure the breakdown into distinct sections:
 
 1. **Executive Summary & Population Percentile**:
    - Report the `global_score` and `percentile_rank` (e.g., "76.8th percentile, placing the face in the Top 23.2% of the population / Top 30% tier").
+   - Report the orientation/profile type rating and percentile.
    - Report the `personal_ceiling` and describe the headroom achievable through modifiable features.
 
-2. **Photographic & Camera Rectification Diagnostics**:
+2. **Feature Ratings & Percentile Breakdown**:
+   - Present a comprehensive table of all anatomical feature groups (`Eyes`, `Cheekbones`, `Jaw`, `Nose`, `Lips & Lower Third`, `Sagittal Profile`).
+   - For each group, provide the Rating (0–100), Population Percentile Rank (0–100%), and Descriptive Classification Tier.
+
+3. **Photographic & Camera Rectification Diagnostics**:
    - Report estimated 3D head pose (pitch, yaw, roll). Confirm that 3D pose rectification was applied so that minor head tilts did not distort projected ratios.
    - Report estimated subject-to-camera distance (in meters). Explain that close-range selfie perspective distortion (which inflates nasal base width by up to 30% per JAMA Facial Plastic Surgery 2018) was normalized to 85mm portrait standard.
    - Note lighting uniformity and any directional shadow warning (preventing shadows from being mistaken for anatomical asymmetry).
