@@ -110,9 +110,27 @@ When analyzing a face, structure the breakdown into distinct sections:
     - The engine continuously attenuates symmetry weighting from $33.3\%$ at $\text{yaw} \le 20^\circ$ down to $0\%$ at $\text{yaw} \ge 45^\circ$ while scaling bone structure towards $60\%$ and harmony towards $40\%$.
     - This prevents artificial perspective penalties from dampening elite skeletal frameworks in $3/4$ views.
 
+11. **Clinical Anthropometric Proportions & Lower Third Dimorphism (Philtrum, Chin, Rule of Fifths)**:
+    - **Cutaneous Philtrum vs Total Upper Lip Canon (`philtrum_ratio`)**:
+      - The cutaneous philtrum column (`sn-ls`, subnasale to labrale superius) measures bare skin height above the vermilion border.
+      - While classical art canons define the entire upper lip (`sn-sto`, subnasale to stomion) as $1/3$ ($0.333$) of the lower third (`sn-me`), the bare philtrum skin alone is physiologically only $0.16\text{–}0.22$ of the lower third.
+      - Evaluating bare skin (`sn-ls`) against full-lip $[0.33, 0.40]$ incorrectly penalizes humans with full, youthful vermilion borders. Calibrated ideal range: `[0.16, 0.22]`.
+    - **Masculine Chin-to-Philtrum Dimorphism (`philtrum_chin_ratio`)**:
+      - In aesthetic plastic surgery and orthodontic cephalometrics (Farkas, Arnett & Bergman), the vertical ratio of the male chin (`li-me`) to cutaneous philtrum (`sn-ls`) ranges from $2.0:1$ to $2.85:1$, with $2.5:1$ universally recognized as the masculine dimorphic gold standard.
+      - Expressed as $\text{philtrum} / \text{chin}$, this corresponds to $[0.35, 0.50]$ (where $0.40 = 2.5:1$).
+      - Overly restrictive bands (e.g. $[0.46, 0.54]$, which only accept $1.85\text{–}2.17:1$) severely penalize chiseled masculine jaws. Calibrated male band: `[0.35, 0.50]`; female band: `[0.43, 0.55]`.
+    - **Neoclassical Rule of Fifths & Nasal Width (`nose_width_ratio`)**:
+      - Under the Leonardo da Vinci Rule of Fifths, the face is divided into five equal ocular widths.
+      - The nasal alar base width equals the intercanthal distance ($\text{al-al} / \text{en-en} = 1.00$).
+      - Farkas anthropometry establishes the adult male Caucasian normative range as $[0.85, 1.05]$.
+    - **Interocular Distance vs Cheekbone Width Distinctions**:
+      - Interocular spacing evaluated relative to bizygomatic width (`interpupillary / bizygomatic`, Pallett et al. $0.46$) can appear artificially depressed when a subject exhibits extreme lateral zygomatic flare (high cheekbone prominence $> 1.18$ / $\text{fWHR} > 1.85$).
+      - When evaluating ocular balance, analysts must correlate the bizygomatic ratio with the Rule of Fifths ($\text{intercanthal} / \text{eye\_fissure\_width} \approx 1.0$) to confirm whether eye spacing is anatomically proportional.
+
 ## Style and Constraints
 
 - Treat deterministic tool output as authoritative.
 - Never invent new numeric scores or ranges that contradict the tool output.
 - Be direct, technical, and emotionally neutral. Avoid shaming or moral judgment.
 - Do not treat 1.618 (the golden ratio) as a target for facial proportions; prioritize empirical anthropometric bands.
+
