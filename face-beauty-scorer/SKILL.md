@@ -154,21 +154,21 @@ When analyzing a face, structure the breakdown into distinct sections:
         3. **Sexual Dimorphism Premium**: Robust secondary sexual characteristics (broad fWHR, angular jawline, positive canthal tilt) elevate perceived visual presence.
         4. **Visual Impact & Contrast**: High Michelson peri-orbital and lip-to-skin contrast reinforces facial distinctiveness.
     - **Empirical Population Rarity Odds**:
-      - Rarity is calculated mathematically from the cumulative normal distribution $\Phi(z)$ calibrated against the general unselected population distribution ($\mu = 50, \sigma = 10$) and multivariate joint feature convergence.
+      - Rarity is calculated mathematically from the cumulative normal distribution $\Phi(z)$ calibrated against the SCUT-FBP5500 population distribution norm ($\mu = 50, \sigma = 15$) and multivariate joint feature convergence.
       - Expressed accurately as real-world population odds:
-        - $\text{Score} \ge 88.0$ ($z \ge +3.80$): **$1 \text{ in } 15,000\text{–}25,000\text{ individuals (Top 0.01%)}$** *(God-Tier / High-Fashion Editorial Archetype)*.
-        - $\text{Score} \ge 84.0$ ($z \ge +3.40$): **$1 \text{ in } 3,000\text{–}10,000\text{ individuals (Top 0.1%)}$** *(Elite Runway & Commercial Lead)*.
-        - $\text{Score} \ge 78.0$ ($z \ge +2.80$): **$1 \text{ in } 500\text{–}2,500\text{ individuals (Top 1%)}$** *(Prominent Commercial Actor / Lead Model)*.
-        - $\text{Score} \ge 70.0$ ($z \ge +2.00$): **$1 \text{ in } 50\text{–}200\text{ individuals (Top 5%)}$** *(Distinctly Attractive / Standout Presence)*.
-        - $\text{Score} \ge 60.0$ ($z \ge +1.00$): **$1 \text{ in } 6\text{–}15\text{ individuals (Top 15–25%)}$** *(Above Average / Harmonious Proportions)*.
-        - $\text{Score} \le 55.0$: **$1 \text{ in } 2\text{ individuals}$** *(Population Median / Everyday Demographics)*.
-    - **Aesthetic Archetype Classifications**:
-      - $\ge 88.0$: *God-Tier / High-Fashion Editorial Archetype (Top 0.01%)*
-      - $84.0\text{–}87.9$: *Supermodel / Elite Runway & Commercial Lead (Top 0.1%)*
-      - $78.0\text{–}83.9$: *Agency Standard / Commercial Model & Actor (Top 1%)*
-      - $70.0\text{–}77.9$: *Distinctly Attractive / High Aesthetic Harmony (Top 5%)*
-      - $60.0\text{–}69.9$: *Above Average / Balanced Proportions (Top 25%)*
-      - $< 60.0$: *Population Norm / Standard Harmony (Median Tier)*
+        - $\text{Score} \ge 88.0$ ($z \ge +2.53$): **$1 \text{ in } 200\text{–}1,000\text{ individuals (Top 0.1–0.5%)}$** *(God-Tier / High-Fashion Editorial Archetype)*.
+        - $\text{Score} \ge 82.0$ ($z \ge +2.13$): **$1 \text{ in } 60\text{–}200\text{ individuals (Top 1.5%)}$** *(Supermodel / Elite Runway & Commercial Lead)*.
+        - $\text{Score} \ge 75.0$ ($z \ge +1.67$): **$1 \text{ in } 20\text{–}50\text{ individuals (Top 5%)}$** *(Agency Standard / Commercial Model & Actor)*.
+        - $\text{Score} \ge 65.0$ ($z \ge +1.00$): **$1 \text{ in } 6\text{–}15\text{ individuals (Top 15%)}$** *(Distinctly Attractive / High Aesthetic Harmony)*.
+        - $\text{Score} \ge 55.0$ ($z \ge +0.33$): **$1 \text{ in } 3\text{ individuals}$** *(Above Average / Balanced Proportions)*.
+        - $\text{Score} \le 50.0$: **$1 \text{ in } 2\text{ individuals}$** *(Population Norm / Individualized Variance)*.
+    - **Strict Elite Archetype Gating (Defect Immunity Protocol)**:
+      - Raw high scores alone do not grant elite modeling tiers if a face possesses disqualifying craniofacial disharmonies.
+      - $\ge 88.0$ + $0$ severe defects + dimorphism $\ge 75$: *God-Tier / High-Fashion Editorial Archetype*
+      - $82.0\text{–}87.9$ + $0$ severe defects: *Supermodel / Elite Runway & Commercial Lead*
+      - $75.0\text{–}81.9$ + $\le 1$ defect: *Agency Standard / Commercial Model & Actor*
+      - $65.0\text{–}74.9$ + $\le 1$ defect: *Distinctly Attractive / High Aesthetic Harmony*
+      - $\ge 3$ severe defects: Restricted strictly to *Individualized Proportions / Atypical Variance* ($<50$) or *Population Norm* ($50\text{–}55$).
 
 13. **Universal Anthropometric Invariance (Hair Occlusion, Rule of Fifths, 2D Ramus-to-Corpus)**:
     - **Dynamic Hair Occlusion Resilience**:
@@ -185,6 +185,14 @@ When analyzing a face, structure the breakdown into distinct sections:
       - Evaluates vertical palpebral aperture to horizontal width (male almond/hunter eyes: `[0.28, 0.38]`, female: `[0.33, 0.42]`).
     - **Vermilion Lower-to-Upper Height Ratio (`vermilion_height_ratio`)**:
       - Evaluates lower-to-upper lip thickness against the classical clinical standard $1.5:1$ (`[1.35, 1.70]`).
+
+14. **Calibrated Category Weighting & Multi-Defect Compounding (Liebig's Law of the Minimum)**:
+    - **Symmetry Hygiene Factor (45% Bone / 45% Harmony / 10% Symmetry)**:
+      - In frontal views, symmetry is weighted at $10\%$ rather than $33.3\%$. Symmetrical placement of mediocre or flawed features does not make a face attractive; symmetry acts as a hygiene prerequisite and penalty check, not a score booster.
+    - **Multi-Defect Compounding Penalty**:
+      - Human facial attractiveness is constrained by the weakest salient features (Liebig's Law of the Minimum).
+      - When a face exhibits multiple severe non-hairline metric defects ($>15\%$ deviation and $<60$ rating), the aesthetic disharmony compounds non-linearly (subtracting $9.0$ points per defect beyond tolerance).
+      - This prevents arithmetic averaging from masking systemic craniofacial disharmony.
 
 ## Style and Constraints
 
