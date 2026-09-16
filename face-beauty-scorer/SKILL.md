@@ -171,10 +171,11 @@ When analyzing a face, structure the breakdown into distinct sections:
       - $\ge 3$ severe defects: Restricted strictly to *Individualized Proportions / Atypical Variance* ($<50$) or *Population Norm* ($50\text{–}55$).
 
 13. **Universal Anthropometric Invariance (Hair Occlusion, Rule of Fifths, 2D Ramus-to-Corpus)**:
-    - **Dynamic Hair Occlusion Resilience**:
+    - **Dynamic Hair Occlusion Resilience (Trichion Decoupling)**:
       - Forehead bangs, fringe, or curly hair falling over the upper face compress the detected upper third (`upper_third < 0.24`).
-      - The engine automatically detects `hairline_occluded=True`. It downweights trichion-dependent upper/mid thirds by 85% and shifts the weight dynamically to `midface_lowerface_ratio` (`[0.85, 1.05]`).
-      - This ensures that hairstyles never artificially penalize underlying skeletal facial harmony.
+      - Because total face height ($y_{\text{chin}} - y_{\text{hairline}}$) is truncated, the lower third fraction ($\text{lower} / \text{total}$) is mathematically inflated.
+      - The engine automatically detects `hairline_occluded=True`. It downweights trichion-dependent thirds (`facial_third_upper` and `facial_third_lower`) by 85% and shifts the weight dynamically to `midface_lowerface_ratio` (`[0.85, 1.05]`).
+      - Hair-corrupted thirds are completely excluded from the defect compounding counter, ensuring hairstyles never artificially penalize underlying skeletal harmony.
     - **2D Projected Ramus-to-Corpus Proportions (`ramus_corpus_ratio`)**:
       - In 3D unprojected skulls, the mandibular ramus/corpus ratio is $0.70\text{–}0.85$.
       - In 2D photographic projections (frontal and 3/4 views), the horizontal mandibular corpus is foreshortened towards the camera by $\approx \cos(45^\circ) = 0.707$.
@@ -185,20 +186,22 @@ When analyzing a face, structure the breakdown into distinct sections:
       - Evaluates vertical palpebral aperture to horizontal width (male almond/hunter eyes: `[0.28, 0.38]`, female: `[0.33, 0.42]`).
     - **Vermilion Lower-to-Upper Height Ratio (`vermilion_height_ratio`)**:
       - Evaluates lower-to-upper lip thickness against the classical clinical standard $1.5:1$ (`[1.35, 1.70]`).
+    - **MediaPipe Facial Adiposity Calibration (`facial_adiposity`)**:
+      - MediaPipe buccal fat landmarks (116, 345) sit anatomically higher and wider than mandibular angle landmarks (172, 397).
+      - In lean, chiseled male faces, this ratio naturally measures `[1.04, 1.14]`. Calibrating the ideal range prevents lean athletic faces from being falsely penalized for adiposity.
+    - **Hooded / Hunter Eye Tolerance (`scleral_show`)**:
+      - In male aesthetics, deep-set hooded eyes with tight lower eyelid support (`[-0.10, 0.01]`) are an affirmative sexually dimorphic trait. Negative values (hooding) are never penalized as defects; only inferior droop / scleral exposure ($>0.02$) is penalized.
 
 14. **Calibrated Category Weighting & Multi-Defect Compounding (Liebig's Law of the Minimum)**:
     - **Symmetry Hygiene Factor (45% Bone / 45% Harmony / 10% Symmetry)**:
       - In frontal views, symmetry is weighted at $10\%$ rather than $33.3\%$. Symmetrical placement of mediocre or flawed features does not make a face attractive; symmetry acts as a hygiene prerequisite and penalty check, not a score booster.
     - **Multi-Defect Compounding Penalty**:
       - Human facial attractiveness is constrained by the weakest salient features (Liebig's Law of the Minimum).
-      - When a face exhibits multiple severe non-hairline metric defects ($>10\%$ deviation and $<60$ rating), the aesthetic disharmony compounds non-linearly (subtracting $6.5$ points per defect beyond tolerance).
-      - This prevents arithmetic averaging from masking systemic craniofacial disharmony.
+      - To avoid penalizing normal biological variance (such as minor lip width or styled hair), true defects require physical salience: non-modifiable metrics with rating $<40.0$, or deviation $>20.0\%$ with rating $<40.0$, or negative canthal tilt ($<-1.0^\circ$).
+      - Compounding penalty is scaled progressively ($3.0\text{ pts}$ per excess defect beyond tolerance $1$) and capped at a maximum of $15.0\text{ pts}$, preventing high-tier faces from collapsing into bottom percentiles.
     - **Localized Feature Group Compounding**:
-      - Feature groups (`Eyes`, `Jaw`, `Lips & Lower Third`, `Cheekbones`) must never mask catastrophic localized flaws (such as negative canthal tilt or lower eyelid retraction) through unaffected regional metrics.
-      - Severe flaws ($<50$ rating) within an anatomical cluster apply localized compounding penalties, preventing flawed anatomy from being falsely classified into "Top 1%" or "Top 5%" tiers.
-    - **Occlusion Selectivity & Directional Anomalies**:
-      - Forehead hair occlusion downweighting applies ONLY when midface-to-lowerface ratio is anatomically harmonious ($0.85\text{–}1.05$). If mid-to-lower face ratio is distorted, lower-third elongation is counted as genuine craniofacial disharmony.
-      - Negative canthal tilt ($<0^\circ$) and inferior scleral show ($>0.02$) follow steep asymmetric drop-offs rather than wide Gaussian bands.
+      - Feature groups (`Eyes`, `Jaw`, `Lips & Lower Third`, `Cheekbones`) must never mask catastrophic localized flaws (such as severe negative canthal tilt or lower eyelid retraction) through unaffected regional metrics.
+      - Severe flaws ($<40$ rating) within an anatomical cluster apply localized compounding penalties, while hair-corrupted thirds are safely decoupled from the lips & lower third group.
 
 ## Style and Constraints
 
