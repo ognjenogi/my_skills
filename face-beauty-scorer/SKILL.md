@@ -191,8 +191,14 @@ When analyzing a face, structure the breakdown into distinct sections:
       - In frontal views, symmetry is weighted at $10\%$ rather than $33.3\%$. Symmetrical placement of mediocre or flawed features does not make a face attractive; symmetry acts as a hygiene prerequisite and penalty check, not a score booster.
     - **Multi-Defect Compounding Penalty**:
       - Human facial attractiveness is constrained by the weakest salient features (Liebig's Law of the Minimum).
-      - When a face exhibits multiple severe non-hairline metric defects ($>15\%$ deviation and $<60$ rating), the aesthetic disharmony compounds non-linearly (subtracting $9.0$ points per defect beyond tolerance).
+      - When a face exhibits multiple severe non-hairline metric defects ($>10\%$ deviation and $<60$ rating), the aesthetic disharmony compounds non-linearly (subtracting $6.5$ points per defect beyond tolerance).
       - This prevents arithmetic averaging from masking systemic craniofacial disharmony.
+    - **Localized Feature Group Compounding**:
+      - Feature groups (`Eyes`, `Jaw`, `Lips & Lower Third`, `Cheekbones`) must never mask catastrophic localized flaws (such as negative canthal tilt or lower eyelid retraction) through unaffected regional metrics.
+      - Severe flaws ($<50$ rating) within an anatomical cluster apply localized compounding penalties, preventing flawed anatomy from being falsely classified into "Top 1%" or "Top 5%" tiers.
+    - **Occlusion Selectivity & Directional Anomalies**:
+      - Forehead hair occlusion downweighting applies ONLY when midface-to-lowerface ratio is anatomically harmonious ($0.85\text{–}1.05$). If mid-to-lower face ratio is distorted, lower-third elongation is counted as genuine craniofacial disharmony.
+      - Negative canthal tilt ($<0^\circ$) and inferior scleral show ($>0.02$) follow steep asymmetric drop-offs rather than wide Gaussian bands.
 
 ## Style and Constraints
 
