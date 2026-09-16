@@ -171,11 +171,17 @@ When analyzing a face, structure the breakdown into distinct sections:
       - $\ge 3$ severe defects: Restricted strictly to *Individualized Proportions / Atypical Variance* ($<50$) or *Population Norm* ($50\text{–}55$).
 
 13. **Universal Anthropometric Invariance (Hair Occlusion, Rule of Fifths, 2D Ramus-to-Corpus)**:
-    - **Dynamic Hair Occlusion Resilience (Trichion Decoupling)**:
-      - Forehead bangs, fringe, or curly hair falling over the upper face compress the detected upper third (`upper_third < 0.24`).
-      - Because total face height ($y_{\text{chin}} - y_{\text{hairline}}$) is truncated, the lower third fraction ($\text{lower} / \text{total}$) is mathematically inflated.
-      - The engine automatically detects `hairline_occluded=True`. It downweights trichion-dependent thirds (`facial_third_upper` and `facial_third_lower`) by 85% and shifts the weight dynamically to `midface_lowerface_ratio` (`[0.85, 1.05]`).
-      - Hair-corrupted thirds are completely excluded from the defect compounding counter, ensuring hairstyles never artificially penalize underlying skeletal harmony.
+    - **True Trichion Boundary & Hairline Occlusion Detection**:
+      - MediaPipe landmark 10 rests at the mid-upper forehead, not the true anatomical trichion (cranial hairline).
+      - The engine traces vertical skin tone pixels upwards from landmark 10 to locate the true boundary `skin_top_y`.
+      - When exposed forehead skin exists above landmark 10 (`pixels_above_10 >= 8`), the upper facial third is measured from `skin_top_y`, yielding physiologically accurate thirds (upper 30–33%, mid 28–31%, lower 40–42%).
+      - When bangs, fringe, or a low camera crop cover the forehead (`pixels_above_10 < 8`), `hairline_occluded=True` is triggered. The engine downweights trichion-dependent thirds by 85% and shifts weight to `midface_lowerface_ratio` (`[0.68, 0.98]`), decoupling hairstyle from skeletal harmony.
+    - **Brachyfacial fWHR Paradox & Pyknic Adiposity Coupling**:
+      - In round, squat, or overweight faces (brachyfacial/pyknic index `face_height_width_ratio < 1.16`), vertical facial height is squashed relative to width.
+      - Because $\text{fWHR} = \text{bizygomatic} / \text{midface\_height}$, vertical compression artificially inflates raw fWHR into the "model" range ($\ge 1.85$), falsely rewarding chubby or squat facial geometry as "high cheekbone width."
+      - The engine counteracts this paradox by coupling `fwhr` and `facial_adiposity` to overall vertical proportion:
+        - When `face_height_width_ratio < 1.16`, `fwhr` is penalized proportionally to vertical deficiency: $\text{drag} = (1.16 - \text{h\_w}) / (1.16 - 0.95)$.
+        - When combined with poor chin projection / double chin (`chin_projection > 0.35`), `facial_adiposity` is dragged down by up to 75%, preventing soft-tissue volume from masquerading as skeletal bone prominence.
     - **2D Projected Ramus-to-Corpus Proportions (`ramus_corpus_ratio`)**:
       - In 3D unprojected skulls, the mandibular ramus/corpus ratio is $0.70\text{–}0.85$.
       - In 2D photographic projections (frontal and 3/4 views), the horizontal mandibular corpus is foreshortened towards the camera by $\approx \cos(45^\circ) = 0.707$.
@@ -195,13 +201,18 @@ When analyzing a face, structure the breakdown into distinct sections:
 14. **Calibrated Category Weighting & Multi-Defect Compounding (Liebig's Law of the Minimum)**:
     - **Symmetry Hygiene Factor (45% Bone / 45% Harmony / 10% Symmetry)**:
       - In frontal views, symmetry is weighted at $10\%$ rather than $33.3\%$. Symmetrical placement of mediocre or flawed features does not make a face attractive; symmetry acts as a hygiene prerequisite and penalty check, not a score booster.
-    - **Multi-Defect Compounding Penalty**:
+    - **Multi-Defect Compounding Penalty (Eliminating the 15-Point Compression Trap)**:
       - Human facial attractiveness is constrained by the weakest salient features (Liebig's Law of the Minimum).
-      - To avoid penalizing normal biological variance (such as minor lip width or styled hair), true defects require physical salience: non-modifiable metrics with rating $<40.0$, or deviation $>20.0\%$ with rating $<40.0$, or negative canthal tilt ($<-1.0^\circ$).
-      - Compounding penalty is scaled progressively ($3.0\text{ pts}$ per excess defect beyond tolerance $1$) and capped at a maximum of $15.0\text{ pts}$, preventing high-tier faces from collapsing into bottom percentiles.
+      - A low cap on penalties (e.g. 15 points) creates artificial score compression where severely dysmorphic or overweight faces starting from an average baseline cannot fall below 70/100, grouping them unfairly near elite faces.
+      - **Calibrated Defect Standard**:
+        - Any metric with rating $<48.0$ and deviation $>15.0\%$ (or negative canthal tilt $<-1.0^\circ$) counts as a severe defect.
+        - Soft-tissue flaws (`facial_adiposity`) are **not** exempt from current-photo defect counting; visible jowls or excessive submental fullness directly compound.
+        - Single isolated quirks are tolerated (`defect_tolerance = 1`).
+        - Beyond tolerance, each defect applies a progressive compounding penalty of **$8.5\text{ pts}$** up to a maximum ceiling of **$36.0\text{ pts}$**.
+        - This enables faces with multiple compounding disharmonies (e.g., squat height-to-width, recessed chin, excess adiposity, compressed facial thirds) to drop decisively into the **$35\text{–}45 / 100$** range ($3.5\text{–}4.5/10$, Population Norm / Below Average), while preserving high-tier faces ($85\text{–}94$) that possess $\le 1$ defect.
     - **Localized Feature Group Compounding**:
       - Feature groups (`Eyes`, `Jaw`, `Lips & Lower Third`, `Cheekbones`) must never mask catastrophic localized flaws (such as severe negative canthal tilt or lower eyelid retraction) through unaffected regional metrics.
-      - Severe flaws ($<40$ rating) within an anatomical cluster apply localized compounding penalties, while hair-corrupted thirds are safely decoupled from the lips & lower third group.
+      - Severe flaws ($<48$ rating) within an anatomical cluster apply localized compounding penalties, while hair-corrupted thirds are safely decoupled from the lips & lower third group.
 
 ## Style and Constraints
 
