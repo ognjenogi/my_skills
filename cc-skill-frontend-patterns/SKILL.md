@@ -627,6 +627,45 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
       {children}
     </div>
   ) : null
+## Mobile Responsive Input & Streaming Safety Patterns
+
+### iOS Safari Input Auto-Zoom Prevention
+Any `<input>` or `<textarea>` styled with `font-size < 16px` (`text-sm` is 14px in Tailwind) triggers iOS Safari's automatic viewport zoom (120–130%) on focus, destroying container margins and shifting content off-screen.
+```tsx
+// ✅ GOOD: 16px on mobile prevents auto-zoom, 14px on desktop
+<textarea className="text-base sm:text-sm placeholder:text-base sm:placeholder:text-sm" />
+```
+
+### 2-Tier Responsive Pill Layout
+Single-row pill inputs containing multiple action buttons (attach, voice, model selector, mode switch) collapse into an unusable 50px squished text box on screens `<= 390px`.
+```tsx
+// ✅ GOOD: 2-tier card on mobile (< sm), sleek single-row pill on desktop (sm:)
+<div className="flex flex-col sm:flex-row rounded-2xl sm:rounded-full p-3 sm:p-4">
+  <textarea className="w-full order-1 sm:order-2 text-base sm:text-sm" />
+  <div className="order-2 sm:order-1 flex items-center justify-between sm:justify-start w-full sm:w-auto mt-2 sm:mt-0">
+    <ActionButtons />
+    <MobileSendButton className="sm:hidden" />
+  </div>
+  <DesktopSendButton className="hidden sm:flex order-3" />
+</div>
+```
+
+### SSE / Fetch Stream Fault Tolerance
+Chat streaming loops must always wrap `fetch()` and `reader.read()` in `try/catch/finally` with `setLoading(false)` to prevent UIs from getting permanently trapped in infinite thinking / loading shimmer when upstream LLMs time out, disconnect, or run out of credits.
+```typescript
+try {
+  const res = await fetch('/api/chat', ...);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const reader = res.body?.getReader();
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    // process chunks
+  }
+} catch (err) {
+  displayErrorFallback(err);
+} finally {
+  setLoading(false); // Guarantees UI exits "thinking" state
 }
 ```
 
