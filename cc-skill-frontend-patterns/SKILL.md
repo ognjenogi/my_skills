@@ -669,4 +669,17 @@ try {
 }
 ```
 
+### Coordinated 3-Layer Cancellation for LLM Streaming
+Stopping a live generation requires clean coordination across 3 layers so partial responses remain readable without triggering unintended retry loops:
+1. **Network abort**: Pass `AbortController.signal` to `fetch('/api/chat', { signal })` and call `controller.abort()`.
+2. **Reader cancellation**: Keep an `activeReaderRef` and execute `activeReaderRef.current?.cancel().catch(() => {})`.
+3. **State & Reconnect Guard**: In the abort branch, set `loading = false`, mark answering message `status = 'completed'` (preserving partial output), and verify `abortControllerRef.current?.signal.aborted` before initiating any reconnect/retry sequence to prevent background polling after user stop.
+
+### Human-Readable Model Error Categorization
+When upstream LLM providers fail, raw status codes or missing credits often cause agent loops to stall or swallow errors into blank screens. Classify errors at stream termination and emit `researchComplete`:
+- **HTTP 402 / Quota / Balance**: `💳 API Credits Empty: Your account has run out of credits or reached its billing limit.`
+- **HTTP 408 / 504 / Stall Timeout**: `⏱️ Request Timed Out: Model took too long to respond. The provider may be experiencing high latency.`
+- **HTTP 401 / 403 / Key**: `🔑 Authentication Failed: The API key is invalid or unauthorized.`
+- **HTTP 429 / Rate Limit**: `⏳ Rate Limit Exceeded: Model is temporarily rate-limited.`
+
 **Remember**: Modern frontend patterns enable maintainable, performant user interfaces. Choose patterns that fit your project complexity.
