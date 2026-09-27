@@ -737,6 +737,21 @@ llm_client = LLMWithFallback(
 )
 ```
 
+### 7.1 Provider Quota Limits & The SDK `retry-after` Trap
+
+#### ⚠️ The SDK `retry-after` Hang
+When LLM providers or third-party gateways (e.g., OpenCode, OpenRouter, Groq) exhaust quota or hit rolling usage windows (e.g. 5-hour rolling limits), they return `HTTP 429` with a large `retry-after` header (e.g. `retry-after: 75134`, over 20 hours).
+- If client SDKs (like `openai-node` or `openai-python`) have default `maxRetries >= 1`, the SDK parses `retry-after` and **blocks/sleeps waiting out the retry window**.
+- In web apps and streaming search agents, this causes the backend to lock up for 45–90 seconds while the frontend UI remains stuck indefinitely in "Thinking" or "Brainstorming" mode.
+- **Rule:** Set `maxRetries: 0` on SDK clients used in interactive request/response pipelines. Fail fast (< 1s) on fatal limits.
+
+#### ⚠️ Fast-Failing Agent Pre-Steps
+In multi-stage agent pipelines (e.g., Classifier → Researcher → Answer Streamer):
+- **Never swallow fatal quota (429/402) or authentication (401) errors** during classification or query expansion into generic fallback objects.
+- Swallowing fatal errors causes the pipeline to proceed blindly into subsequent expensive steps with an exhausted key, keeping the UI locked in thinking loops.
+- Detect fatal quota/auth patterns (`status === 401 | 402 | 429` or matching `/usage limit|quota|insufficient credits|unauthorized/i`), immediately terminate research loops, and emit an explicit user-facing error badge with reset instructions.
+
+
 ---
 
 ## Architecture Decision Matrix
