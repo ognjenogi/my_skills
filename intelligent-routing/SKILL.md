@@ -114,6 +114,11 @@ function analyzeRequest(userMessage) {
 | **SEO**         | seo, meta, analytics, sitemap, robots      | `seo-specialist`        |
 | **Game**        | unity, godot, phaser, game, multiplayer    | `game-developer`        |
 
+> [!IMPORTANT]
+> **Word-Boundary Matching (Avoid Substring Traps):**
+> When pattern-matching keywords for domain detection or classification, always enforce word boundaries (e.g. `\bauth\b`, `\bart\b`, `\blaw\b`) instead of naive substring `.includes()`. Substring matching creates false positives (e.g., `martingales` incorrectly matching `art`, `author` matching `auth`, `flawless` matching `law`).
+
+
 ### Multi-Domain Tasks (Auto-invoke Orchestrator)
 
 If request matches **2+ domains from different categories**, automatically use `orchestrator`:
