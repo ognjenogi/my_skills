@@ -200,4 +200,22 @@ app/
 
 ---
 
+## 11. Streaming Routes & Background Task Resilience
+
+### Transport Abort vs Task Abort
+
+In AI, search, or long-running streaming endpoints (SSE / `ReadableStream`):
+
+| Event | Behavior | Correct Action |
+|-------|----------|----------------|
+| **Socket Drop / Screen Lock** | Mobile OS suspends tab, `req.signal` fires `abort` | Close stream writer ONLY. Do NOT cancel agent/model background execution. |
+| **User Clicks "Stop" Button** | User intentionally halts generation | Call dedicated `POST /api/.../abort` endpoint to halt model inference and save partial state. |
+
+### Best Practices for Mobile Resilience
+- **Let the background finish**: Never tie background state persistence exclusively to HTTP socket lifetime. Allow background generation to commit final blocks to the database.
+- **Sync on `visibilitychange`**: When the user returns to the tab (`document.visibilityState === 'visible'`), query the database for the active message ID to immediately display the completed answer.
+- **Replay stream on reconnect**: If generation is still running when the user returns, reconnect to the active session stream and continue consuming tokens seamlessly.
+
+---
+
 > **Remember:** Server Components are the default for a reason. Start there, add client only when needed.
