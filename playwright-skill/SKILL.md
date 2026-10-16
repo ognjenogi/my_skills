@@ -451,3 +451,4 @@ User: "Use 3001"
 - Test scripts written to `/tmp` for automatic cleanup (no clutter)
 - Code executes reliably with proper module resolution via `run.js`
 - Progressive disclosure - API_REFERENCE.md loaded only when advanced features needed
+- **Streaming/SSE Note:** When testing applications with Server-Sent Events (SSE) or background heartbeat connections (e.g., Next.js AI streaming), avoid `wait_until='networkidle'` as continuous heartbeats cause 30s timeouts. Use `wait_until='domcontentloaded'` or `'load'`.
