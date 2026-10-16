@@ -282,6 +282,7 @@ These techniques are part of systematic debugging and available in this director
 - **`root-cause-tracing.md`** - Trace bugs backward through call stack to find original trigger
 - **`defense-in-depth.md`** - Add validation at multiple layers after finding root cause
 - **`condition-based-waiting.md`** - Replace arbitrary timeouts with condition polling
+- **Conversational Input Routing Hygiene** - Strip apostrophes and normalize text before intent classification; guard both the router and the execution handler so user confusion is never misclassified as failed answers or strikes.
 
 **Related skills:**
 - **`.agent/skills/test-driven-development/SKILL.md`** - For creating failing test case (Phase 4, Step 1)
