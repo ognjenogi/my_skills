@@ -158,4 +158,23 @@ When something's wrong:
 
 ---
 
+## 9. Modern Edge Cases & Diagnostics
+
+### Outbound API Stalls & IPv6 PMTU Blackholes
+- **Symptom:** Outbound HTTPS calls to Cloudflare-fronted APIs (e.g. LLM providers) hang indefinitely or stall on large requests with `Send-Q` backlog and `unacked: 1` in `ss -ti`.
+- **Root Cause:** glibc defaults to preferring IPv6 over IPv4 (`RFC 3484`), but intermediate network hops drop oversized IPv6 packets without returning ICMPv6 Packet Too Big messages (PMTU blackhole).
+- **Remediation:**
+  1. Force IPv4 precedence on host: uncomment `precedence ::ffff:0:0/96 100` in `/etc/gai.conf`.
+  2. For Docker containers: add `sysctls: [ "net.ipv6.conf.all.disable_ipv6=1" ]` to `docker-compose.yaml`.
+
+### CPU-Bound Inference & Vector Embedding Batching
+- **Symptom:** Vector ingestion jobs hang or fail with `RuntimeError: Failed to get embeddings` / HTTP read timeouts (~120s-150s).
+- **Root Cause:** Default batch sizes (e.g. 50 chunks of 1000 characters) overwhelm CPU-only Ollama/LLM instances, exceeding upstream HTTP client timeouts.
+- **Remediation:**
+  1. Reduce embedding batch size: set `OPEN_NOTEBOOK_EMBEDDING_BATCH_SIZE=5`.
+  2. Throttle concurrency: set `OPEN_NOTEBOOK_WORKER_MAX_TASKS=1` so worker tasks do not saturate all CPU cores simultaneously.
+
+---
+
 > **Remember:** A well-managed server is boring. That's the goal.
+
