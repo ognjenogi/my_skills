@@ -267,6 +267,22 @@ onError: (error) => {
 </Button>
 ```
 
+## Card / Modal On-Hold and State Preservation Pattern
+
+When an interactive card (such as a quiz, drill, evaluation, or multi-step form) is active and awaiting user input, and the learner/user needs to ask a clarification question:
+
+1. **Collapsible On-Hold Banner:**
+   Provide a minimize toggle (<Minimize2 />) and collapse into a compact, unobtrusive banner (`[ ⏸️ Active task on hold: <Title> | Resume → ]`).
+2. **Draft State Preservation:**
+   Never discard unsubmitted inputs (textarea text, selected radio options) during collapse. Store them in local component state so re-expansion restores them identically.
+3. **Automated Doubt Trigger:**
+   When the user clicks a "Question or doubt? Ask below" action:
+   - Automatically collapse the active card into the on-hold banner.
+   - Shift focus directly to the chat input (`input.focus()`).
+   - Pre-populate a helpful query prefix (`"Could you clarify: "`).
+4. **Chat Cleanliness Separation:**
+   Keep raw evaluation scorecards, test examiner rubrics, and formal assessment matrices isolated in structured notes/sidebars (`append_note`), keeping the conversational stream natural and encouraging.
+
 ## Checklist
 
 Before completing any UI component:
