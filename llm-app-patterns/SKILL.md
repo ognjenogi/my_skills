@@ -752,6 +752,20 @@ In multi-stage agent pipelines (e.g., Classifier → Researcher → Answer Strea
 - Detect fatal quota/auth patterns (`status === 401 | 402 | 429` or matching `/usage limit|quota|insufficient credits|unauthorized/i`), immediately terminate research loops, and emit an explicit user-facing error badge with reset instructions.
 
 
+
+### Reasoning-Model Thinking Defaults & Tool-Loop Double Generations
+
+Verified live 2026-10-19 (Z.AI `api.z.ai/api/coding/paas/v4`, GLM-5.3 / 5.3-flash):
+
+- **Omitting `thinking` means thinking ON.** For Z.AI and OpenCode-Go gateways, only the binary `thinking: {type: 'enabled' | 'disabled'}` is honored. A request with no `thinking` field streamed ~300–700 reasoning chars before text. For conversational turns, send `{thinking: {type: 'disabled'}}` explicitly, and request deep reasoning only for proof or long-derivation turns.
+- **The provider TTFT floor is not zero.** Z.AI's TTFT was ≈2.1–2.5 s even for a one-line prompt with thinking disabled, and ~1 in 7 requests failed transiently (`fetch failed`). Measure the raw provider floor before promising sub-second TTFT; wrap the stream in a retry.
+- **OpenCode Go** rejects raw requests without an `x-opencode-session` header (`400 MissingSessionID`).
+- **Bookkeeping tools must not buy a second generation.** In an agent loop, feeding a confirmation-only tool result (note append, background-job enqueue) back to the model triggers a full second completion. The user sees "think → pause → think again" and a near-duplicate message.
+  - End the turn after a bookkeeping-only batch when the model already wrote prose.
+  - Allow at most one tool-only follow-up when a hard mandate is pending, and suppress its restated prose (word-trigram overlap ≥ 0.6).
+  - Count only model-written prose as "delivered", never a synthesized fallback.
+  - Derive the mandate from the current turn's input, never from stale tool rows in the history.
+
 ---
 
 ## Architecture Decision Matrix
